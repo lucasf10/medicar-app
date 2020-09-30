@@ -6,7 +6,7 @@ from .models import Especialidade
 class EspecialidadeAdmin(admin.ModelAdmin):
     model = Especialidade
     list_display = ('id', 'nome')
-    # search_fields = ('nome', )
-    # ordering = ('nome', )
+    search_fields = ('nome', )
+    ordering = ('nome', 'id')
 
 admin.site.register(Especialidade, EspecialidadeAdmin)

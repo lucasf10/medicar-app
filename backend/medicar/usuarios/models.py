@@ -7,8 +7,8 @@ from .managers import UsuarioManager
 
 class Usuario(AbstractBaseUser, PermissionsMixin):
 
-    nome = models.CharField(max_length=100)
-    email = models.EmailField(unique=True)
+    nome = models.CharField(max_length=100, null=False, blank=False)
+    email = models.EmailField(unique=True, null=False, blank=False)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
     data_criacao = models.DateTimeField(default=timezone.now)
