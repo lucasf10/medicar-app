@@ -1,4 +1,5 @@
-from rest_framework import mixins, viewsets, filters
+from rest_framework import mixins, viewsets
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
 
 from .models import Especialidade
@@ -10,4 +11,4 @@ class EspecialidadesViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = EspecialidadeSerializer
     permission_classes = [IsAuthenticated]
     search_fields = ['nome']
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = (SearchFilter,)

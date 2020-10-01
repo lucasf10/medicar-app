@@ -1,8 +1,11 @@
-from rest_framework import mixins, viewsets, filters
+from rest_framework import mixins, viewsets
+from rest_framework.filters import SearchFilter
 from rest_framework.permissions import IsAuthenticated
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Medico
 from .serializers import MedicoSerializer
+from .filters import EspecialidadeFilter
 
 
 class MedicosViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -10,4 +13,5 @@ class MedicosViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = MedicoSerializer
     permission_classes = [IsAuthenticated]
     search_fields = ['nome']
-    filter_backends = (filters.SearchFilter,)
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    filter_class = EspecialidadeFilter
