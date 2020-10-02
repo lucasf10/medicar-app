@@ -7,12 +7,14 @@ from usuarios.views import UsuarioCreate, UsuarioLogin
 from especialidades.views import EspecialidadesViewSet
 from medicos.views import MedicosViewSet
 from agendas.views import AgendasViewSet
+from consultas.views import ConsultasViewSet
 
 
 router = DefaultRouter()
 router.register(r'especialidades', EspecialidadesViewSet)
 router.register(r'medicos', MedicosViewSet)
 router.register(r'agendas', AgendasViewSet)
+router.register(r'consultas', ConsultasViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
