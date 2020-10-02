@@ -5,7 +5,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Medico
 from .serializers import MedicoSerializer
-from .filters import EspecialidadeFilter
+from .filters import MedicosFilter
 
 
 class MedicosViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
@@ -14,4 +14,4 @@ class MedicosViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     permission_classes = [IsAuthenticated]
     search_fields = ['nome']
     filter_backends = [SearchFilter, DjangoFilterBackend]
-    filter_class = EspecialidadeFilter
+    filter_class = MedicosFilter

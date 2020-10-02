@@ -4,7 +4,7 @@ from .models import Medico
 from especialidades.models import Especialidade
 
 
-class EspecialidadeFilter(FilterSet):
+class MedicosFilter(FilterSet):
     especialidade = ModelMultipleChoiceFilter(queryset=Especialidade.objects.all())
 
     class Meta:

@@ -6,11 +6,13 @@ from rest_framework.routers import DefaultRouter
 from usuarios.views import UsuarioCreate, UsuarioLogin
 from especialidades.views import EspecialidadesViewSet
 from medicos.views import MedicosViewSet
+from agendas.views import AgendasViewSet
 
 
 router = DefaultRouter()
 router.register(r'especialidades', EspecialidadesViewSet)
 router.register(r'medicos', MedicosViewSet)
+router.register(r'agendas', AgendasViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
