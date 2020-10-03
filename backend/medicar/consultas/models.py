@@ -1,6 +1,4 @@
 from django.db import models
-
-from django.db import models
 from django.contrib.postgres.fields import ArrayField
 
 from medicos.models import Medico
@@ -26,6 +24,10 @@ class Consulta(models.Model):
         blank=False
     )
 
-
     def __str__(self):
-        return 'Consulta de {} com {} ({}T{})'.format(self.paciente, self.medico.nome, self.dia, self.horario)
+        return 'Consulta de {} com {} ({}T{})'.format(
+            self.paciente,
+            self.medico.nome,
+            self.dia_horario.date,
+            self.dia_horario.time
+        )
