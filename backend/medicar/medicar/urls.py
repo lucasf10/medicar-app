@@ -20,6 +20,6 @@ router.register(r'consultas', ConsultasViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('usuario/criar/', UsuarioCreate.as_view(), name='criar_usuario'),
-    path('login/', UsuarioLogin.as_view(), name='altenticar_usuario'),
+    path('login/', UsuarioLogin.as_view(), name='autenticar_usuario'),
     path('', include(router.urls)),
 ]
