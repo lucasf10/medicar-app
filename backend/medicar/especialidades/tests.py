@@ -6,7 +6,7 @@ from django.urls import reverse
 from .models import Especialidade
 from usuarios.models import Usuario
 
-class TestUsuariosAPI(APITestCase):
+class TestEspecialidadesAPI(APITestCase):
 
     def setUp(self):
         self.client = APIClient()
@@ -28,7 +28,7 @@ class TestUsuariosAPI(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
 
     def test_listar_especialidades(self):
-        data_esperada = [
+        dados_esperados = [
             {'id': 1, 'nome':'Pediatria'},
             {'id': 2, 'nome':'Cardiologia'}
         ]
@@ -36,4 +36,4 @@ class TestUsuariosAPI(APITestCase):
         self.client.login(email='teste_existente@mail.com', password='88888888')
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data, data_esperada)
+        self.assertEqual(response.data, dados_esperados)
