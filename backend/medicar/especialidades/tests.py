@@ -8,18 +8,20 @@ from usuarios.models import Usuario
 
 class TestEspecialidadesAPI(APITestCase):
 
-    def setUp(self):
-        self.client = APIClient()
-        self.usuario_existente_data = {
+    @classmethod
+    def setUpTestData(cls):
+        cls.client = APIClient()
+        cls.usuario_existente_data = {
             'email': 'teste_existente@mail.com',
             'password': '88888888',
             'nome': 'Teste'
         }
-        self.usuario_existente = Usuario.objects.create_user(**self.usuario_existente_data)
-        self.url = reverse('especialidade-list')
-        self.criar_especialidades()
+        cls.usuario_existente = Usuario.objects.create_user(**cls.usuario_existente_data)
+        cls.url = reverse('especialidade-list')
+        cls.criar_especialidades()
 
-    def criar_especialidades(self):
+    @classmethod
+    def criar_especialidades(cls):
         Especialidade.objects.create(nome='Pediatria')
         Especialidade.objects.create(nome='Cardiologia')
 
@@ -34,6 +36,22 @@ class TestEspecialidadesAPI(APITestCase):
         ]
         
         self.client.login(email='teste_existente@mail.com', password='88888888')
+        
         response = self.client.get(self.url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, dados_esperados)
+
+    def test_listar_especialidades_busca(self):
+        dados_esperados = [
+            {'id': 1, 'nome':'Pediatria'},
+        ]
+        
+        self.client.login(email='teste_existente@mail.com', password='88888888')
+        
+        response = self.client.get(self.url+'?search=ped')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, dados_esperados)
+
+        response = self.client.get(self.url+'?search=pra')
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertEqual(response.data, [])
