@@ -20,29 +20,39 @@ class TestMedicosAPI(APITestCase):
         cls.usuario_existente = Usuario.objects.create_user(**cls.usuario_existente_data)
         cls.url = reverse('medico-list')
         cls.criar_medicos()
-    
+
     @classmethod
     def criar_medicos(cls):
-        Medico.objects.create(
+        esp1 = Especialidade.objects.create(nome='Pediatria')
+        esp2 = Especialidade.objects.create(nome='Cardiologia')
+
+        med1 = Medico.objects.create(
             nome='Medico Teste',
-            crm='1234',
-            especialidade=Especialidade.objects.create(nome='Pediatria')
+            crm='1111',
+            especialidade=esp1
         )
-        Medico.objects.create(
+        med2 = Medico.objects.create(
             nome='Outro Medico',
-            crm='4567',
-            especialidade=Especialidade.objects.create(nome='Cardiologia')
+            crm='2222',
+            especialidade=esp2
         )
 
+        cls.id_pediatria = esp1.id
+        cls.id_cardiologia = esp2.id
+        cls.id_med1 = med1.id
+        cls.id_med2 = med2.id
+
     def get_dados_esperados_completo(self):
+
         return [
-            {'id': 1, 'crm': '1234', 'nome': 'Medico Teste', 'especialidade': {'id': 1, 'nome': 'Pediatria'}},
-            {'id': 2, 'crm': '4567', 'nome': 'Outro Medico', 'especialidade': {'id': 2, 'nome': 'Cardiologia'}},
+            {'id': self.id_med1, 'crm': '1111', 'nome': 'Medico Teste', 'especialidade': {'id': self.id_pediatria, 'nome': 'Pediatria'}},
+            {'id': self.id_med2, 'crm': '2222', 'nome': 'Outro Medico', 'especialidade': {'id': self.id_cardiologia, 'nome': 'Cardiologia'}},
         ]
 
     def get_dados_esperados_minimo(self):
+
         return [
-            {'id': 2, 'crm': '4567', 'nome': 'Outro Medico', 'especialidade': {'id': 2, 'nome': 'Cardiologia'}},
+            {'id': self.id_med2, 'crm': '2222', 'nome': 'Outro Medico', 'especialidade': {'id': self.id_cardiologia, 'nome': 'Cardiologia'}},
         ]
 
     def test_nao_autorizado(self):
@@ -81,13 +91,13 @@ class TestMedicosAPI(APITestCase):
         
         self.client.login(email='teste_existente@mail.com', password='88888888')
         
-        response = self.client.get(self.url+'?especialidade=2')
+        response = self.client.get(self.url+'?especialidade='+str(self.id_cardiologia))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, dados_esperados_minimo)
 
-        response = self.client.get(self.url+'?especialidade=3')
+        response = self.client.get(self.url+'?especialidade='+str(self.id_cardiologia+1))
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
-        response = self.client.get(self.url+'?especialidade=1&especialidade=2')
+        response = self.client.get(self.url+'?especialidade='+str(self.id_cardiologia)+'&especialidade='+str(self.id_pediatria))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(response.data, dados_esperados_completo)

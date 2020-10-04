@@ -7,14 +7,15 @@ from .models import Usuario
 
 class TestUsuariosAPI(APITestCase):
 
-    def setUp(self):
-        self.client = APIClient()
-        self.usuario_existente_data = {
+    @classmethod
+    def setUpTestData(cls):
+        cls.client = APIClient()
+        cls.usuario_existente_data = {
             'email': 'teste_existente@mail.com',
             'password': '88888888',
             'nome': 'Teste'
         }
-        self.usuario_existente = Usuario.objects.create_user(**self.usuario_existente_data)
+        cls.usuario_existente = Usuario.objects.create_user(**cls.usuario_existente_data)
 
     def test_criar_usuario(self):
         data = {
