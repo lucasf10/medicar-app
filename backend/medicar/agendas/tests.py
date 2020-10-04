@@ -115,6 +115,7 @@ class TestAgendasAPI(APITestCase):
         self.assertEqual(response.data, dados_esperados_minimo)
 
         response = self.client.get(self.url+'?especialidade='+str(self.id_pediatria)+'&especialidade='+str(self.id_cardiologia))
+        dados_esperados_completo = sorted(dados_esperados_completo, key=lambda dado: dado['id'], reverse=True)
         self.assertEqual(response.data, dados_esperados_completo)
 
         response = self.client.get(self.url+'?especialidade='+str(self.id_cardiologia+1))

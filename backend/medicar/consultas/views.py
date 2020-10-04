@@ -29,7 +29,7 @@ class ConsultasViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.De
         dia_horario = datetime.strptime('{}T{}'.format(agenda.dia, horario), '%Y-%m-%dT%H:%M')
         horario = dia_horario.time()
 
-        if horario not in agenda.horarios or dia_horario < now():
+        if horario not in agenda.horarios or make_aware(dia_horario) < now():
             return Response(
                 {'mensagem': 'Horário não disponível.'},
                 status=status.HTTP_400_BAD_REQUEST
@@ -48,20 +48,6 @@ class ConsultasViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.De
             )
 
         return Response(ConsultaSerializer(consulta).data, status=status.HTTP_201_CREATED)
-
-    
-    def destroy(self, request, *args, **kwargs):
-        consulta_obj = self.get_object()
-        
-        if consulta_obj.paciente != request.user:
-            return Response(
-                {'mensagem': 'Paciente só pode deletar consultas marcadas por ele.'},
-                status=status.HTTP_403_FORBIDDEN
-            )
-
-        self.perform_destroy(consulta_obj)
-        return Response(status=status.HTTP_204_NO_CONTENT)
-
 
     def get_queryset(self):
         return self.queryset.filter(paciente=self.request.user)
