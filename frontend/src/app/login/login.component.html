@@ -1,0 +1,14 @@
+<div class="container-form">
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+        <input type="text" name="email" placeholder="E-mail ou Login" id="email-login" [(ngModel)]="email" required>
+        <input type="password" name="password" placeholder="Senha" id="password-login" [(ngModel)]="password" required>
+        <div class="grupo-form">
+            <input type="checkbox">
+            <span>Lembrar minha senha</span>
+        </div>
+        <div class="grupo-form">
+            <button type="submit" id="acessar">Acessar</button>
+            <button id="criar-conta" (click)="goToCriarConta()">Criar Conta</button>
+        </div>
+    </form>
+</div>

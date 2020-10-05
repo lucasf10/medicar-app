@@ -1,0 +1,12 @@
+<div class="container">
+    <header>
+        <img src="../../assets/images/logo.png" />
+        <div>
+            <span class="nome-paciente">{{ nomePaciente }}</span>
+            <button (click)="logout()">Desconectar</button>
+        </div>
+    </header>
+    
+    <app-lista-consultas></app-lista-consultas>
+    <app-cria-consulta></app-cria-consulta>
+</div>

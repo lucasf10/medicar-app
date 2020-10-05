@@ -1,0 +1,8 @@
+<form #cadastroForm="ngForm" (ngSubmit)="cadastrar()">
+    <input type="text" name="email" placeholder="E-mail ou Login" id="nome-login" [(ngModel)]="nome">
+    <input type="text" name="email" placeholder="E-mail ou Login" id="email-login" [(ngModel)]="email">
+    <input type="password" name="password1" placeholder="Senha" id="password1-login" [(ngModel)]="password1">
+    <input type="password" name="password2" placeholder="Confirmar Senha" id="password2-login" [(ngModel)]="password2">
+    <button type="submit" id="cancelar-button" (click)="goToLogin()">Cancelar</button>
+    <button id="confirmar-button">Confirmar</button>
+</form>

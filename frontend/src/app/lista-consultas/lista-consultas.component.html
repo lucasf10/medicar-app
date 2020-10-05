@@ -1,0 +1,22 @@
+<p>lista-consulta works!</p>
+
+<table *ngIf="consultas">
+    <thead>
+        <tr align="left">
+            <th>Especialidade</th>
+            <th>Profissional</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let consulta of consultas">
+            <td>{{ consulta.medico.especialidade.nome }}</td>
+            <td>{{ consulta.medico.nome }}</td>
+            <td>{{ consulta.dia }}</td>
+            <td>{{ consulta.horario }}</td>
+            <td><button (click)="desmarcar()">Desmarcar</button></td>
+        </tr>
+    </tbody>
+</table>

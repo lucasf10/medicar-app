@@ -1,0 +1,12 @@
+.container {
+    width: 647px;
+    padding: 0 10px;
+    margin: 0 auto;
+
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
