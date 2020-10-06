@@ -23,14 +23,16 @@ export class LoginComponent implements OnInit {
 
   login() {
     this._autenticacao.loginUsuario(this.email, this.password)
-      .then(resp => {
-        localStorage.setItem('token', resp['token']);
-        localStorage.setItem('nomeUsuario', resp['usuario'].nome);
-        this._router.navigateByUrl('/');
-
-      }).catch(resp => {
+      .subscribe(
+        resp => {
+          localStorage.setItem('token', resp['token']);
+          localStorage.setItem('nomeUsuario', resp['usuario'].nome);
+          this._router.navigateByUrl('/');
+        },
+        error => console.log(error));
+      /*.catch(resp => {
         console.log(resp)
-      });
+      });*/
   }
 
   goToCriarConta() {

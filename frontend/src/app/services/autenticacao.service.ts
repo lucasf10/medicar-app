@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http'
 import { environment } from 'src/environments/environment';
 
@@ -9,17 +10,17 @@ export class AutenticacaoService {
 
   constructor(private _http: HttpClient) { }
 
-  public loginUsuario(email: string, password: string): Promise<any> {
+  public loginUsuario(email: string, password: string): Observable<any> {
 
     const data = {
       'email': email,
       'password': password
     }
     
-    return this._http.post<any>(`${environment.apiUrl}/login/`, data).toPromise()
+    return this._http.post<any>(`${environment.apiUrl}/login/`, data); //.toPromise()
   }
 
-  public cadastrarUsuario(email: string, nome: string, password:string): Promise<any> {
+  public cadastrarUsuario(email: string, nome: string, password:string): Observable<any> {
 
     const data = {
       'email': email,
@@ -27,6 +28,6 @@ export class AutenticacaoService {
       'password': password
     }
     
-    return this._http.post<any>(`${environment.apiUrl}/usuario/criar/`, data).toPromise()
+    return this._http.post<any>(`${environment.apiUrl}/usuario/criar/`, data); //.toPromise()
   }
 }

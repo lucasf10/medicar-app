@@ -1,6 +1,11 @@
-<p>lista-consulta works!</p>
-
-<table *ngIf="consultas">
+<header>
+    <h1>Consulta Clínica</h1>
+    <button (click)="abrirNovaConsulta()">
+        <img src="../../assets/images/fa-solid_plus_white.svg">
+        Nova Consulta
+    </button>
+</header>
+<table *ngIf="consultas; else semConsultasContainer" border="0" cellpadding="0" cellspacing="0">
     <thead>
         <tr align="left">
             <th>Especialidade</th>
@@ -13,10 +18,21 @@
     <tbody>
         <tr *ngFor="let consulta of consultas">
             <td>{{ consulta.medico.especialidade.nome }}</td>
-            <td>{{ consulta.medico.nome }}</td>
+            <td>Dr(a). {{ consulta.medico.nome }}</td>
             <td>{{ consulta.dia }}</td>
             <td>{{ consulta.horario }}</td>
-            <td><button (click)="desmarcar()">Desmarcar</button></td>
+            <td>
+                <button (click)="desmarcarConsulta(consulta.id)">
+                    <img src="../../assets/images/fa-solid_plus.svg">
+                    Desmarcar
+                </button>
+            </td>
         </tr>
     </tbody>
 </table>
+
+<ng-template #semConsultasContainer>
+    <div class="sem-consultas-container">
+        <span>Nenhuma consulta marcada.</span>
+    </div>
+</ng-template>

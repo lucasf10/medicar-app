@@ -1,16 +1,57 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+// @import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+// @include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+// $frontend-primary: mat-palette($mat-indigo);
+// $frontend-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+// $frontend-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+// $frontend-theme: mat-light-theme((
+//   color: (
+//     primary: $frontend-primary,
+//     accent: $frontend-accent,
+//     warn: $frontend-warn,
+//   )
+// ));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+// @include angular-material-theme($frontend-theme);
+
 /* You can add global styles to this file, and also import other style files */
 
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
-$black: #444444;
-$primary-color: #49B4BB;
-$primary-hover: #90D3D7;
-$secondary-hover: #D9F1F3;
-$grey-1: #F8F8F8;
-$grey-2: #A8A8A8;
+@import './assets/css/variables';
 
-$font-family: 'Roboto', sans-serif;
+html, body {
+  height: 100%;
+}
 
 body {
-    position: relative;
+  position: relative;
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  line-height: 15px;
+  display: flex;
+  color: $black;
+  // align-items: center;
+  // text-align: center;
+  justify-content: center;
 }

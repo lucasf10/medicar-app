@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators'
 import { environment } from 'src/environments/environment';
 import { Consulta } from '../models/consulta';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,14 +19,18 @@ export class ApiService {
     return null;
   }
 
-  getConsultas(): Promise<any> {
+  getConsultas(): Observable<Consulta[]> {
 
     return this._http.get(`${environment.apiUrl}/consultas/`).pipe(
       map(consultas => this.criarObjetosConsulta(consultas))
-    ).toPromise();
+    ); // .toPromise();
   }
 
-  public criarObjetosConsulta(consultasJson): Consulta[] {
+  deleteConsulta(id: number): Promise<any> {
+    return this._http.delete(`${environment.apiUrl}/consultas/${id}`).toPromise();
+  }
+
+  private criarObjetosConsulta(consultasJson): Consulta[] {
     
     const listaConsultas: Consulta[] = [];
     
@@ -33,4 +38,5 @@ export class ApiService {
 
     return listaConsultas;
   }
+
 }

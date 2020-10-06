@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule } from '@angular/forms'
+import { MatDialogModule } from '@angular/material/dialog';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +13,7 @@ import { HomeComponent } from './home/home.component';
 import { ListaConsultasComponent } from './lista-consultas/lista-consultas.component';
 import { CriaConsultaComponent } from './cria-consulta/cria-consulta.component';
 import { AutenticacaoInterceptor } from './services/autenticacao.interceptor';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -20,13 +23,18 @@ import { AutenticacaoInterceptor } from './services/autenticacao.interceptor';
     CadastroComponent,
     HomeComponent,
     ListaConsultasComponent,
-    CriaConsultaComponent,
+    CriaConsultaComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    MatDialogModule
+  ],
+  entryComponents: [
+    CriaConsultaComponent
   ],
   providers: [
     {

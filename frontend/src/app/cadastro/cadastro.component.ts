@@ -25,12 +25,13 @@ export class CadastroComponent implements OnInit {
 
   cadastrar() {
     this._autenticacao.cadastrarUsuario(this.email, this.nome, this.password1)
-      .then(resp => {
-        console.log(resp);
-        this._router.navigateByUrl('/')
-      }).catch(resp => {
-        console.log(resp)
-      });
+      .subscribe(
+        resp => this._router.navigateByUrl('/'),
+        error => console.log(error)
+      );
+      // .catch(resp => {
+      //   console.log(resp)
+      // });
   }
 
   goToLogin() {
