@@ -13,7 +13,9 @@ export class ApiService {
   constructor(private _http: HttpClient) {}
 
   static getToken(): string | null {
+
     if (localStorage.getItem('token')){
+
       return localStorage.getItem('token');
     }
     return null;
@@ -22,18 +24,19 @@ export class ApiService {
   getConsultas(): Observable<Consulta[]> {
 
     return this._http.get(`${environment.apiUrl}/consultas/`).pipe(
+
       map(consultas => this.criarObjetosConsulta(consultas))
-    ); // .toPromise();
+    );
   }
 
   deleteConsulta(id: number): Promise<any> {
+
     return this._http.delete(`${environment.apiUrl}/consultas/${id}`).toPromise();
   }
 
   private criarObjetosConsulta(consultasJson): Consulta[] {
     
     const listaConsultas: Consulta[] = [];
-    
     consultasJson.forEach(consulta => listaConsultas.push(Consulta.fromJSON(consulta)));
 
     return listaConsultas;

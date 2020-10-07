@@ -1,14 +1,25 @@
 <div class="container-form">
-    <form #loginForm="ngForm" (ngSubmit)="login()">
-        <input type="text" name="email" placeholder="E-mail ou Login" id="email-login" [(ngModel)]="email" required>
-        <input type="password" name="password" placeholder="Senha" id="password-login" [(ngModel)]="password" required>
+    <header>
+        <img src="../../assets/images/logo.svg" alt="Medicar" />
+    </header>
+    <form #loginForm="ngForm" (ngSubmit)="login()" ngNativeValidate>
+        <mat-form-field appearance="outline">
+            <mat-label>E-mail ou Login</mat-label>
+            <input matInput input type="email" name="email" id="email-login" [(ngModel)]="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="password">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" name="password" id="password-login" [(ngModel)]="password" required>
+            <img matSuffix src="../../assets/images/fa-solid_eye.svg" />
+        </mat-form-field>
+
         <div class="grupo-form">
-            <input type="checkbox">
-            <span>Lembrar minha senha</span>
+            <mat-checkbox color='primary'>Lembrar minha senha</mat-checkbox>
         </div>
         <div class="grupo-form">
-            <button type="submit" id="acessar">Acessar</button>
             <button id="criar-conta" (click)="goToCriarConta()">Criar Conta</button>
+            <button type="submit" id="acessar">Acessar</button>
         </div>
     </form>
 </div>

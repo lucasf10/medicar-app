@@ -32,6 +32,10 @@ export class ListaConsultasComponent implements OnInit {
     this._consultas = consultas;
   }
 
+  listaConsultasEstaVazia(): boolean {
+    return this.consultas.length > 0;
+  }
+
   getConsultas() {
 
     this._api.getConsultas().subscribe((consultas: Consulta[]) => {

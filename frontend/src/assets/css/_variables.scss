@@ -2,5 +2,42 @@ $black: #444444;
 $primary-color: #49B4BB;
 $primary-hover: #90D3D7;
 $secondary-hover: #D9F1F3;
-$grey-1: #F8F8F8;
-$grey-2: #A8A8A8;
+$gray-1: #F8F8F8;
+$gray-2: #A8A8A8;
+
+$font-family: Roboto, "Helvetica Neue", sans-serif;
+$default-line-height: 15px;
+$default-font-size: 13px;
+
+$primary-palette: (
+    50 : #e9f6f7,
+    100 : #c8e9eb,
+    200 : #a4dadd,
+    300 : #80cbcf,
+    400 : #64bfc5,
+    500 : #49b4bb,
+    600 : #42adb5,
+    700 : #39a4ac,
+    800 : #319ca4,
+    900 : #218c96,
+    A100 : #d2fbff,
+    A200 : #9ff7ff,
+    A400 : #6cf2ff,
+    A700 : #52f0ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #000000,
+        700 : #000000,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
