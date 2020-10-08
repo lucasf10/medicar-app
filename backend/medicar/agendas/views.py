@@ -21,6 +21,7 @@ class AgendasViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         queryset = self.filter_queryset(self.get_queryset())
         serializer = self.get_serializer(queryset, many=True)
 
+        lista_agendas = []
         for agenda in serializer.data:
             horarios_filtrados = []
             for hora in agenda['horarios']:
@@ -30,4 +31,7 @@ class AgendasViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
                     horarios_filtrados.append(hora)
             agenda['horarios'] = horarios_filtrados
 
-        return Response(serializer.data)
+            if len(agenda['horarios']) > 0:
+                lista_agendas.append(agenda)
+
+        return Response(lista_agendas)
