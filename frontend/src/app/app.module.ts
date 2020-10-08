@@ -1,13 +1,14 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon';
-
+import { MatSelectModule } from '@angular/material/select';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -17,7 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { ListaConsultasComponent } from './lista-consultas/lista-consultas.component';
 import { CriaConsultaComponent } from './cria-consulta/cria-consulta.component';
 import { AutenticacaoInterceptor } from './services/autenticacao.interceptor';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DataLocale } from './dataLocale.pipe';
 
 
 @NgModule({
@@ -27,11 +28,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CadastroComponent,
     HomeComponent,
     ListaConsultasComponent,
-    CriaConsultaComponent
+    CriaConsultaComponent,
+    DataLocale,
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -39,7 +42,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   entryComponents: [
     CriaConsultaComponent

@@ -1,1 +1,44 @@
-<p>cria-consulta works!</p>
+<div class="container-form">
+    <header>
+        <h1>Nova Consulta</h1>
+    </header>
+
+    <form [formGroup]="formulario" (ngSubmit)="criarConsulta()">
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="especialidade" placeholder="Especialidade" (selectionChange)="populaMedicos()">
+                <mat-option *ngFor="let especialidade of especialidades" [value]="especialidade.id">
+                    {{ especialidade.nome }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="medico" placeholder="Médico" [disabled]="arrayVazio(medicos)" (selectionChange)="populaDatas()">
+                <mat-option *ngFor="let medico of medicos" [value]="medico.id">
+                    {{ medico.nome }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="data" placeholder="Data" [disabled]="arrayVazio(datas)" (selectionChange)="populaHoras()">
+                <mat-option *ngFor="let data of datas" [value]="data">
+                    {{ data | dataLocale }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-select formControlName="hora" [disabled]="arrayVazio(horarios)" placeholder="Hora">
+                <mat-option *ngFor="let hora of horarios" [value]="hora">
+                    {{ hora }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <div class="grupo-form">
+            <button type="button" mat-dialog-close>Cancelar</button>
+            <button type="submit">Confirmar</button>
+        </div>
+    </form>
+</div>

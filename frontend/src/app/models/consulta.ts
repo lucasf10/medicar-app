@@ -34,8 +34,4 @@ export class Consulta {
   public getId(): number {
     return this.id;
   }
-
-
-
-    
 }

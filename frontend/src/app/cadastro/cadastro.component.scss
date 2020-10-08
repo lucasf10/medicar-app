@@ -1,0 +1,128 @@
+@import '../../assets/css/variables';
+
+@mixin light-button {
+    border-radius: 8px;
+    border: none;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 21px;
+    transition: 0.3s;
+    cursor: pointer;
+    padding: 10px;
+    width: 180px;
+}
+
+.container-form {
+    width: 400px;
+    max-width: 100%;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    header {
+
+        img {
+            height: 50px;
+        }
+
+        h1 {
+            margin: 20px 0;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 21px;
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+
+        .grupo-form {
+            display: flex;
+            align-items: center;
+            color: #a8a8a8;
+            margin-bottom: 30px;
+        }
+
+        button {
+
+            @include light-button;
+            background-color: white;
+            padding: 10px 35px;
+            color: $primary-color;
+            margin-right: 40px;
+
+            &[type="submit"] {
+                color: white;
+                background-color: $primary-color;
+                margin-right: 0;
+
+                &:hover {
+                    background-color: $primary-hover;
+                }
+            }
+
+            &:hover {
+                background-color: $secondary-hover;
+            }
+        }
+    }
+}
+
+:host ::ng-deep {
+
+    .mat-form-field-appearance-outline .mat-form-field-wrapper {
+        margin: 0;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .mat-form-field-appearance-outline.password2 .mat-form-field-wrapper {
+        margin-bottom: 40px;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: $gray-2;
+    }
+
+    .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+        color: $primary-color;
+    }
+    
+    .mat-input-element {
+        font-family: $font-family;
+        font-size: $default-font-size;
+        line-height: $default-line-height;
+    }
+
+    .mat-form-field-label,
+    .mat-form-field.mat-focused .mat-form-field-label {
+        color: $gray-2;
+    }
+
+    .mat-checkbox-checkmark {
+        display: none;
+    }
+
+    .mat-checkbox-layout {
+        margin-top: 5px;
+
+        .mat-checkbox-label {
+            font-size: 13px;
+        }
+    }
+
+    .mat-checkbox-background {
+        border-radius: 4px;
+    }
+
+    .mat-checkbox-frame {
+        border: 1px solid $gray-2;
+        border-radius: 4px;
+    }
+}

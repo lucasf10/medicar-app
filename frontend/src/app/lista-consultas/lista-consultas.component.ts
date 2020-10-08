@@ -12,7 +12,7 @@ import { ApiService } from '../services/api.service';
 })
 export class ListaConsultasComponent implements OnInit {
 
-  private _consultas: Consulta[];
+  private _consultas: Consulta[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -61,10 +61,17 @@ export class ListaConsultasComponent implements OnInit {
 
   abrirNovaConsulta() {
     let dialogRef = this.dialog.open(CriaConsultaComponent, {
-      height: '400px',
-      width: '600px',
+      panelClass: 'cria-consulta-dialog-container',
+      height: '430px',
+      width: '480px',
       disableClose: true,
     });
+
+    dialogRef.afterClosed().subscribe((consultaCriada: boolean) => {
+      if (consultaCriada) {
+        this.getConsultas();
+      }
+    })
   }
 
 }
