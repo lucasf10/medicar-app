@@ -26,17 +26,17 @@ class ConsultasViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, mixins.De
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        dia_horario = datetime.strptime('{}T{}'.format(agenda.dia, horario), '%Y-%m-%dT%H:%M')
+        dia_horario = datetime.strptime('{}T{}-0300'.format(agenda.dia, horario), '%Y-%m-%dT%H:%M%z')
         horario = dia_horario.time()
 
-        if horario not in agenda.horarios or make_aware(dia_horario) < now():
+        if horario not in agenda.horarios or dia_horario < now():
             return Response(
                 {'mensagem': 'Horário não disponível.'},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
         consulta, criado = Consulta.objects.get_or_create(
-            dia_horario=make_aware(dia_horario),
+            dia_horario=dia_horario,
             medico=agenda.medico,
             defaults={'paciente': request.user}
         )

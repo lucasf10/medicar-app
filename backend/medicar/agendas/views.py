@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from django_filters.rest_framework import DjangoFilterBackend
 from datetime import datetime, date
+from django.utils.timezone import now
 
 from .models import Agenda
 from .serializers import AgendaSerializer
@@ -25,9 +26,9 @@ class AgendasViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         for agenda in serializer.data:
             horarios_filtrados = []
             for hora in agenda['horarios']:
-                dia_horario = datetime.strptime('{}T{}'.format(agenda['dia'], hora), '%Y-%m-%dT%H:%M')
+                dia_horario = datetime.strptime('{}T{}-0300'.format(agenda['dia'], hora), '%Y-%m-%dT%H:%M%z')
                 consulta_marcada = Consulta.objects.filter(dia_horario=dia_horario).exists()
-                if dia_horario > datetime.now() and not consulta_marcada:
+                if dia_horario > now() and not consulta_marcada:
                     horarios_filtrados.append(hora)
             agenda['horarios'] = horarios_filtrados
 
