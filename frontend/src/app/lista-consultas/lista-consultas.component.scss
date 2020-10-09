@@ -21,7 +21,7 @@
         }
 
         button {
-            @include light-button;
+            @include light-button-menor;
             background-color: $primary-color;
             padding: 6px 17px 6px 12px;
             color: white;
@@ -65,7 +65,7 @@
         }
 
         button {
-            @include light-button;
+            @include light-button-menor;
             padding: 6px 17px 6px 12px;
             color: $primary-color;
             background-color: transparent;
