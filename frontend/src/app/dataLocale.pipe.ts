@@ -5,6 +5,6 @@ export class DataLocale implements PipeTransform {
 
   transform(dateString: string): string {
     
-    return new Date(dateString).toLocaleDateString();
+    return new Date(dateString.concat(' 00:00:00')).toLocaleDateString();
   }
 }

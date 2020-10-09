@@ -5,21 +5,26 @@
     <form [formGroup]="formulario" (ngSubmit)="login()">
         <mat-form-field appearance="outline">
             <mat-label>E-mail ou Login</mat-label>
-            <input matInput type="email" name="email" formControlName="email" required>
+            <input matInput type="email" name="email" formControlName="email">
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="password">
             <mat-label>Senha</mat-label>
-            <input matInput type="password" name="password" formControlName="senha" required>
+            <input matInput type="password" name="password" formControlName="senha">
             <img matSuffix src="../../assets/images/fa-solid_eye.svg" />
         </mat-form-field>
 
         <div class="grupo-form">
             <mat-checkbox color='primary'>Lembrar minha senha</mat-checkbox>
         </div>
+
+        <div *ngIf="errorMsg" class="mensagem-erro">
+            {{ errorMsg }}
+        </div>
+
         <div class="grupo-form">
             <button id="criar-conta" type="button" (click)="goToCriarConta()">Criar Conta</button>
-            <button type="submit" id="acessar">Acessar</button>
+            <button type="submit" id="acessar" [disabled]="!formulario.valid">Acessar</button>
         </div>
     </form>
 </div>

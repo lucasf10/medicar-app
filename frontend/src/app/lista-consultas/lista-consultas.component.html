@@ -19,7 +19,7 @@
         <tr *ngFor="let consulta of consultas">
             <td>{{ consulta.medico.especialidade.nome }}</td>
             <td>Dr(a). {{ consulta.medico.nome }}</td>
-            <td>{{ consulta.dia }}</td>
+            <td>{{ consulta.dia | dataLocale }}</td>
             <td>{{ consulta.horario }}</td>
             <td>
                 <button (click)="desmarcarConsulta(consulta.id)">

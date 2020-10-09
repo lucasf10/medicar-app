@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import { AutenticacaoService } from '../services/autenticacao.service';
@@ -12,6 +12,7 @@ import { AutenticacaoService } from '../services/autenticacao.service';
 export class LoginComponent implements OnInit {
 
   public formulario: FormGroup;
+  public errorMsg: string;
 
   constructor(
     private _autenticacao: AutenticacaoService,
@@ -27,8 +28,8 @@ export class LoginComponent implements OnInit {
   private criarFormulario(): FormGroup {
     return this._formBuilder.group(
       {
-        email: [ null, [Validators.email, Validators.required]],
-        senha: [null, [Validators.required]]
+        email: new FormControl(null, [Validators.email, Validators.required]),
+        senha: new FormControl(null, [Validators.required])
       },
     );
   }
@@ -41,10 +42,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('nomeUsuario', resp['usuario'].nome);
           this._router.navigateByUrl('/');
         },
-        error => console.log(error));
-      /*.catch(resp => {
-        console.log(resp)
-      });*/
+        error => this.errorMsg = error.error['mensagem']
+      );
   }
 
   goToCriarConta() {

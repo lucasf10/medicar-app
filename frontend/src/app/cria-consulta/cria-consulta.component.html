@@ -5,7 +5,7 @@
 
     <form [formGroup]="formulario" (ngSubmit)="criarConsulta()">
         <mat-form-field appearance="outline">
-            <mat-select formControlName="especialidade" placeholder="Especialidade" (selectionChange)="populaMedicos()">
+            <mat-select formControlName="especialidade" placeholder="Especialidade" (selectionChange)="populaMedicos()" matInput>
                 <mat-option *ngFor="let especialidade of especialidades" [value]="especialidade.id">
                     {{ especialidade.nome }}
                 </mat-option>
@@ -13,7 +13,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-select formControlName="medico" placeholder="Médico" [disabled]="arrayVazio(medicos)" (selectionChange)="populaDatas()">
+            <mat-select formControlName="medico" placeholder="Médico" (selectionChange)="populaDatas()" matInput>
                 <mat-option *ngFor="let medico of medicos" [value]="medico.id">
                     {{ medico.nome }}
                 </mat-option>
@@ -21,7 +21,7 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-select formControlName="data" placeholder="Data" [disabled]="arrayVazio(datas)" (selectionChange)="populaHoras()">
+            <mat-select formControlName="data" placeholder="Data" (selectionChange)="populaHoras()" matInput>
                 <mat-option *ngFor="let data of datas" [value]="data">
                     {{ data | dataLocale }}
                 </mat-option>
@@ -29,16 +29,20 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-            <mat-select formControlName="hora" [disabled]="arrayVazio(horarios)" placeholder="Hora">
+            <mat-select formControlName="hora" placeholder="Hora" matInput>
                 <mat-option *ngFor="let hora of horarios" [value]="hora">
                     {{ hora }}
                 </mat-option>
             </mat-select>
         </mat-form-field>
 
+        <div *ngIf="errorMsg" class="mensagem-erro">
+            Houve um problema para marcar a consulta. Tente novamente mais tarde.
+        </div>
+
         <div class="grupo-form">
             <button type="button" mat-dialog-close>Cancelar</button>
-            <button type="submit">Confirmar</button>
+            <button type="submit" [disabled]="!todosCamposPreenchidos">Confirmar</button>
         </div>
     </form>
 </div>

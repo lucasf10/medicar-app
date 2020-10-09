@@ -62,8 +62,18 @@ body {
       color: $gray-2;
     }
   }
+
+  button[disabled] {
+      cursor: not-allowed !important;
+  }
 }
 
 .cria-consulta-dialog-container .mat-dialog-container {
   padding: 40px 40px 20px 40px;
+}
+
+.mensagem-erro {
+  text-align: center;
+  margin-bottom: 20px;
+  color: red;
 }

@@ -1,12 +1,3 @@
-<!-- <form #cadastroForm="ngForm" (ngSubmit)="cadastrar()">
-    <input type="text" name="email" placeholder="E-mail ou Login" id="nome-login" [(ngModel)]="nome">
-    <input type="text" name="email" placeholder="E-mail ou Login" id="email-login" [(ngModel)]="email">
-    <input type="password" name="password1" placeholder="Senha" id="password1-login" [(ngModel)]="password1">
-    <input type="password" name="password2" placeholder="Confirmar Senha" id="password2-login" [(ngModel)]="password2">
-    <button type="submit" id="cancelar-button" (click)="goToLogin()">Cancelar</button>
-    <button id="confirmar-button">Confirmar</button>
-</form> -->
-
 <div class="container-form">
     <header>
         <img src="../../assets/images/logo.svg" alt="Medicar" />
@@ -36,9 +27,17 @@
             <img matSuffix src="../../assets/images/fa-solid_eye.svg" />
         </mat-form-field>
 
+        
+        <div *ngIf="hasConfirmarSenhaErro()" class="mensagem-erro">
+            As senhas devem ser iguais.
+        </div>
+        <div *ngIf="errorMsg" class="mensagem-erro">
+            {{ errorMsg }}
+        </div>
+
         <div class="grupo-form">
             <button type="button" (click)="goToLogin()">Cancelar</button>
-            <button type="submit">Confirmar</button>
+            <button type="submit" [disabled]="formulario.valid">Confirmar</button>
         </div>
     </form>
 </div>

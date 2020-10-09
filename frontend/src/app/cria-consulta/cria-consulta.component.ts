@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 
 import { Agenda } from '../models/agenda';
@@ -17,6 +17,7 @@ import { ApiService } from '../services/api.service';
 export class CriaConsultaComponent implements OnInit {
 
   public formulario: FormGroup;
+  public errorMsg: boolean = false;
   private agendas: Agenda[];
   private agendaSelecionadaId: number;
   private _especialidades: Especialidade[] = [];
@@ -45,10 +46,10 @@ export class CriaConsultaComponent implements OnInit {
   private criarFormulario(): FormGroup {
     return this._formBuilder.group(
       {
-        especialidade: [null, [Validators.required]],
-        medico: [null, [Validators.required]],
-        data: [null, [Validators.required]],
-        hora: [null, [Validators.required]]
+        especialidade: new FormControl(null, [Validators.required]),
+        medico: new FormControl({value: null, disable: true}, [Validators.required]),
+        data: new FormControl({value: null, disable: true}, [Validators.required]),
+        hora: new FormControl({value: null, disable: true}, [Validators.required])
       }
     );
   }
@@ -56,12 +57,22 @@ export class CriaConsultaComponent implements OnInit {
   populaMedicos() {
     this.datas = [];
     this.horarios = [];
+
     const especialidade_id = this.formulario.controls['especialidade'].value;
 
     if (especialidade_id) {
 
       this._api.getMedicosByEspecialidade(especialidade_id).subscribe((medicos: Medico[]) => {
         this.medicos = medicos;
+
+        if (!this.arrayVazio(this.medicos)) {
+
+          this.formulario.controls['medico'].enable();
+          this.formulario.controls['data'].disable();
+          this.formulario.controls['data'].patchValue(null);
+          this.formulario.controls['hora'].disable();
+          this.formulario.controls['hora'].patchValue(null);
+        }
       });
     }
   }
@@ -77,6 +88,13 @@ export class CriaConsultaComponent implements OnInit {
         agendas.forEach((agenda: Agenda) => {
           this.datas.push(agenda.getDia());
         });
+
+        if (!this.arrayVazio(this.datas)) {
+
+          this.formulario.controls['data'].enable();
+          this.formulario.controls['hora'].disable();
+          this.formulario.controls['hora'].patchValue(null);
+        }
       });
     }
   }
@@ -90,16 +108,36 @@ export class CriaConsultaComponent implements OnInit {
       this.horarios = agenda.getHorarios();
       this.agendaSelecionadaId = agenda.getId()
     }
+
+    if (!this.arrayVazio(this.horarios)) {
+
+      this.formulario.controls['hora'].enable();
+    }
+  }
+
+  get todosCamposPreenchidos(): boolean {
+    
+    return this.formulario.controls['especialidade'].enabled
+      && this.formulario.controls['medico'].enabled
+      && this.formulario.controls['data'].enabled
+      && this.formulario.controls['hora'].valid;
   }
 
   criarConsulta() {
 
+    console.log(this.formulario);
+
     this._api.marcarConsulta(
       this.agendaSelecionadaId,
       this.formulario.controls['hora'].value
-    ).subscribe((consulta: Consulta) => {
-      this._modal.close(true);
-    });
+    ).subscribe(
+      (consulta: Consulta) => {
+        this._modal.close(true);
+      },
+      error => {
+        this.errorMsg = true;
+      }
+    );
   }
 
   datasDisplay(): string[] {
