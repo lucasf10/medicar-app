@@ -28,13 +28,16 @@ DATABASES = {
     }
 }
 ```
-  7. Rode as migrações: `./manage.py migrate`
-  8. Inicie o servidos: `./manage.py runserver`
-  9. Para criar um super usuário, e conseguir acessar o painel administrativo (http://localhost:8000/admin/): `./manage.py createsuperuser`
+  7. Adicione a variável de ambiente: SECRET_KEY, gere uma secrete key para o app
+  8. Entre na pasta do projeto: `cd medicar`
+  9. Entre na pasta do projeto: `cd medicar`
+  10. Rode as migrações: `./manage.py migrate`
+  11. Inicie o servidos: `./manage.py runserver`
+  12. Para criar um super usuário, e conseguir acessar o painel administrativo (http://localhost:8000/admin/): `./manage.py createsuperuser`
 
 ## Como Rodar o Client (Frontend):
   0. Tenha certeza que o node e o npm estão instalados em sua máquina.
   1. Supondo que o repositório já tenha sido clonado para rodar a API, volte até a raiz, e navegue até a pasta frontend: `cd frontend`
   2. Instale o projeto: `npm install`
-  3. Rode o projeto: `npm run`
+  3. Rode o projeto: `npm start`
   4. Acesse: `https://localhost:4200`
