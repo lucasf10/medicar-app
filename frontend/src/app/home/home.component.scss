@@ -1,0 +1,39 @@
+@import '../../assets/css/variables';
+
+.container {
+    max-width: 100%;
+    padding: 0 10px;
+    height: 100%;
+    width: 627px;
+    display: flex;
+    flex-direction: column;
+
+    header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 18px 0 16px;
+
+        .logo-img {
+            height: 25px;
+            width: auto;
+        }
+
+        .nome-paciente {
+            margin-right: 40px;
+            color: $gray-2;
+        }
+
+        a {
+            color: $primary-color;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        a:hover {
+            opacity: 0.8;
+        }
+        
+    }
+}

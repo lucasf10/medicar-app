@@ -1,0 +1,43 @@
+<div class="container-form">
+    <header>
+        <img src="../../assets/images/logo.svg" alt="Medicar" />
+        <h1>Crie sua conta</h1>
+    </header>
+    <form [formGroup]="formulario" (ngSubmit)="cadastrar()">
+
+        <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input matInput input type="text" name="nome" formControlName="nome">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input matInput input type="email" name="email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="password1">
+            <mat-label>Senha</mat-label>
+            <input matInput type="password" name="password1" formControlName="password1">
+            <img matSuffix src="../../assets/images/fa-solid_eye.svg" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="password2">
+            <mat-label>Confirmar Senha</mat-label>
+            <input matInput type="password" name="password2" formControlName="password2">
+            <img matSuffix src="../../assets/images/fa-solid_eye.svg" />
+        </mat-form-field>
+
+        
+        <div *ngIf="hasConfirmarSenhaErro()" class="mensagem-erro">
+            As senhas devem ser iguais.
+        </div>
+        <div *ngIf="errorMsg" class="mensagem-erro">
+            {{ errorMsg }}
+        </div>
+
+        <div class="grupo-form">
+            <button type="button" (click)="goToLogin()">Cancelar</button>
+            <button type="submit" [disabled]="formulario.valid">Confirmar</button>
+        </div>
+    </form>
+</div>
